@@ -12,7 +12,7 @@ var colors = [
   "#009894"
 ];
 
-var colorAssignment = function(x){
-  var i = (Math.log(x)/Math.LN2);
-  return colors[i-1];
-}
+var colorAssignment = function(x) {
+  var i = (Math.log(x) / Math.LN2);
+  return colors[i - 1];
+};

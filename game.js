@@ -144,12 +144,12 @@ Game2048.prototype._moveDown = function() {
   return boardChanged;
 };
 
-Game2048.prototype.win = function () {
+Game2048.prototype.win = function() {
   return this.won;
 };
 
-Game2048.prototype._gameFinished = function(){
-  if(this.won || this.lost){
+Game2048.prototype._gameFinished = function() {
+  if (this.won || this.lost) {
     return true;
   }
   return false;
@@ -179,26 +179,26 @@ Game2048.prototype.move = function(direction) {
   }
 };
 
-Game2048.prototype._isGameLost = function () {
+Game2048.prototype._isGameLost = function() {
   if (this._getAvailablePosition())
     return;
 
-  var that   = this;
+  var that = this;
   var isLost = true;
 
-  this.board.forEach(function (row, rowIndex) {
-    row.forEach(function (cell, cellIndex) {
+  this.board.forEach(function(row, rowIndex) {
+    row.forEach(function(cell, cellIndex) {
       var current = that.board[rowIndex][cellIndex];
       var top, bottom, left, right;
 
       if (that.board[rowIndex][cellIndex - 1]) {
-        left  = that.board[rowIndex][cellIndex - 1];
+        left = that.board[rowIndex][cellIndex - 1];
       }
       if (that.board[rowIndex][cellIndex + 1]) {
         right = that.board[rowIndex][cellIndex + 1];
       }
       if (that.board[rowIndex - 1]) {
-        top    = that.board[rowIndex - 1][cellIndex];
+        top = that.board[rowIndex - 1][cellIndex];
       }
       if (that.board[rowIndex + 1]) {
         bottom = that.board[rowIndex + 1][cellIndex];
@@ -216,22 +216,22 @@ Game2048.prototype._isGameLost = function () {
 
 var game;
 
-window.onload = function () {
+window.onload = function() {
   game = new Game2048();
   renderTiles();
 };
 
-function renderTiles () {
-  game.board.forEach(function(row, rowIndex){
-    row.forEach(function (cell, cellIndex) {
+function renderTiles() {
+  game.board.forEach(function(row, rowIndex) {
+    row.forEach(function(cell, cellIndex) {
       if (cell) {
         var tileContainer = document.getElementById("tile-container");
-        var newTile       = document.createElement("div");
+        var newTile = document.createElement("div");
 
-        newTile.classList  = "tile val-" + cell;
+        newTile.classList = "tile val-" + cell;
         newTile.classList += " tile-position-" + rowIndex + "-" + cellIndex;
         newTile.classList += " gameTile";
-        newTile.innerHTML  = (cell);
+        newTile.innerHTML = (cell);
         newTile.style.background = colorAssignment(cell);
 
         tileContainer.appendChild(newTile);
@@ -240,25 +240,25 @@ function renderTiles () {
   });
 }
 
-function resetTiles () {
+function resetTiles() {
   var tilesContainer = document.getElementById("tile-container");
-  var tiles          = tilesContainer.getElementsByClassName("gameTile");
+  var tiles = tilesContainer.getElementsByClassName("gameTile");
 
-  Array.prototype.slice.call(tiles).forEach(function (tile) {
+  Array.prototype.slice.call(tiles).forEach(function(tile) {
     tilesContainer.removeChild(tile);
   });
 }
 
-function updateScore () {
-  var score          = game.score;
+function updateScore() {
+  var score = game.score;
   var scoreContainer = document.getElementsByClassName("js-score");
 
-  Array.prototype.slice.call(scoreContainer).forEach(function (span) {
-      span.innerHTML = score;
+  Array.prototype.slice.call(scoreContainer).forEach(function(span) {
+    span.innerHTML = score;
   });
 }
 
-function gameStatus () {
+function gameStatus() {
   if (game.win) {
     document.getElementById("game-over").classList = "show-won";
   } else if (game.lose) {
@@ -266,14 +266,23 @@ function gameStatus () {
   }
 }
 
-function moveListeners (event) {
+function moveListeners(event) {
 
   switch (event.keyCode) {
-    case 37: game.move("left");  break;
-    case 38: game.move("up");    break;
-    case 39: game.move("right"); break;
-    case 40: game.move("down");  break;
-    default: return;
+    case 37:
+      game.move("left");
+      break;
+    case 38:
+      game.move("up");
+      break;
+    case 39:
+      game.move("right");
+      break;
+    case 40:
+      game.move("down");
+      break;
+    default:
+      return;
   }
 
   resetTiles();
